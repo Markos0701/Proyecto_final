@@ -1,0 +1,24 @@
+
+{% extends "Esqueleto.html" %}
+
+{% load static %}
+
+{% block titulo %}
+<h1 class="mb-5">BIENVENIDOS A LA SECCION FAMILIARES </h1>
+{% endblock %}
+
+{% block contenido_que_cambia %}
+
+    <h1> INGRESO DE FAMILIARES </h1> 
+
+    <form action="{% url 'Familiar_site' %}" method="POST">{% csrf_token %}
+        <p>Nombre del familiar: <input type="text" name="nombre"> </p>
+        <p>Apellido del familiar: <input type="text" name="apellido"> </p>
+        <p>Edad del familia: <input type="number" name="edad"> </p>
+        <p>Afinidad del familia: <input type="text" name="afinidad"> </p>
+        <p>Fecha de nacimiento del familia: <input type="date" name="fecha_nacimiento"> </p>
+        <input type="submit" value="Guardar Familiar">
+    </form>
+    
+{% endblock %}
+

@@ -1,0 +1,29 @@
+
+{% extends "Esqueleto.html" %}
+
+{% load static %}
+
+{% block titulo %}
+<h1 class="mb-5"> AGREGANDO AVATAR DE: {{usuario.username}} </h1>
+{% endblock %}
+
+{% block contenido_que_cambia %}
+
+<center><h1> <h3>{{ mensaje }}</h3> </center>   
+<p></p> 
+<form method="POST" enctype="multipart/form-data"> {% csrf_token %}
+    <center> 
+        <table>
+            
+            {{form.as_table}}
+            
+        </table>
+
+        <p></p>
+        <input type="submit" value="AGREGAR AVATAR USUARIO">
+    </center> 
+</form>
+
+
+
+{% endblock %}

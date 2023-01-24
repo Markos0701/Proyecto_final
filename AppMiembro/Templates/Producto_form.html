@@ -1,0 +1,46 @@
+
+{% extends "Esqueleto.html" %}
+
+{% load static %}
+
+{% block titulo %}
+<h1 class="mb-5">BIENVENIDOS A LA SECCION PRODUCTOS </h1>
+{% endblock %}
+
+{% block contenido_que_cambia %}
+
+<center><h1>INGRESO DE PRODUCTOS</h1></center>
+<p></p>
+<p></p>     
+<form action="{% url 'Producto_site' %}" method="POST">{% csrf_token %}
+    <center>
+    <table>
+
+        {{ProductoForm.as_table}}
+
+    </table>
+    </center>
+   <p></p>
+   
+<center><input type="submit" value="Guardar PRODUCTOS"></center>
+
+</form>
+
+
+<hr> </hr>
+<center><h1> BUSQUEDA DE PRODUCTOS  </h1> </center>
+
+<form action="{% url 'Producto_Busqueda' %}" method="GET">
+
+    <center><h1></h1>
+        <input type="text" name="PRODUCTO">
+        <input type="submit" value="BUSCAR PRODUCTOS">
+        <p></p>
+        <h3 class="mb-5">{{mensaje}}</h3>
+    </center>
+
+</form>
+
+
+
+{% endblock %}

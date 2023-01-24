@@ -1,0 +1,29 @@
+
+{% extends "Esqueleto.html" %}
+
+{% load static %}
+
+{% block titulo %}
+<h1 class="mb-5"> Sección de Autrenticación de Usuario</h1>
+{% endblock %}
+
+{% block contenido_que_cambia %}
+<center><h1> ¡ Ingresa tus credenciales! </h1> </center>   
+<p></p> 
+<form action="{% url 'Logeando' %}" method="POST">{% csrf_token %}
+    <center> 
+        <h1 class="mb-5">{{mensaje}}</h1>
+        <table>
+            
+            {{form.as_table}}
+            
+        </table>
+
+        <p></p>
+        <input type="submit" value="Ingresar">
+    </center> 
+</form>
+
+
+
+{% endblock %}

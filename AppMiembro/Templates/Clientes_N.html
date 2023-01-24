@@ -1,0 +1,44 @@
+
+{% extends "Esqueleto.html" %}
+
+{% load static %}
+
+{% block titulo %}
+<h1 class="mb-5"> SECCIÓN DE REGISTRO </h1>
+{% endblock %}
+
+{% block contenido_que_cambia %}
+<center><h1> ¡ REGISTRATE ACA ! </h1> </center>   
+<p></p> 
+<p></p>
+<form action="{% url 'Clientes_site' %}" method="POST">{% csrf_token %}
+    <center> 
+        <table>
+            
+            {{ClienteForm.as_table}}
+            
+        </table>
+
+        <p></p>
+        <input type="submit" value="Enviar registro">
+    </center> 
+</form>
+<hr> </hr><p></p>
+
+    <h1> ¡ Lista de clientes! </h1>  
+<ol>
+   
+        {%for Cliente in clientes  %}
+        <p></p>
+        <p></p>
+        <p></p>
+        <table>
+        {{ Cliente.id }} - {{ Cliente.nombre }} {{ Cliente.apellido }} - {{ Cliente.dni }} - {{ Cliente.asignado_a }} - {{ Cliente.fecha_registro }}  
+        <a class="btn btn-danger" href="{% url 'eliminar_cliente' Cliente.id %}">ELIMINAR</a>
+        <a class="btn btn-success" href="{% url 'editarCliente' Cliente.id %}">EDITAR</a>
+        </table>
+        
+        {% endfor %}  
+</ol>
+
+{% endblock %}

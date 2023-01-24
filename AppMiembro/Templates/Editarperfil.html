@@ -1,0 +1,28 @@
+
+{% extends "Esqueleto.html" %}
+
+{% load static %}
+
+{% block titulo %}
+<h1 class="mb-5"> {{mensaje}} </h1>
+{% endblock %}
+
+{% block contenido_que_cambia %}
+<center><h1> ¡ Edita tu Usuario! </h1> </center>   
+<p></p> 
+<form action="{% url 'editarperfil' %}" method="POST">{% csrf_token %}
+    <center> 
+        <table>
+            
+            {{form.as_table}}
+            
+        </table>
+
+        <p></p>
+        <input type="submit" value="Guardar Cambios">
+    </center> 
+</form>
+
+
+
+{% endblock %}

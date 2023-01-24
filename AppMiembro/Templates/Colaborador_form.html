@@ -1,0 +1,56 @@
+
+{% extends "Esqueleto.html" %}
+
+{% load static %}
+
+{% block titulo %}
+<h1 class="mb-5">BIENVENIDOS A LA SECCION COLABORADORES </h1>
+{% endblock %}
+
+{% block contenido_que_cambia %}
+<center> 
+    <h1> INGRESO DE COLABORADORES  </h1>    
+    <h1 class="mb-5">{{mensaje}}</h1>
+ 
+    <form action="{% url 'Colaborador_site' %}" method="POST">{% csrf_token %}
+        
+        <table>
+
+            {{form_colaborador.as_table}}
+
+        </table>
+        
+        <input type="submit" value="Guardar Colaborador">
+
+    </form>
+
+    <div id="main-container-tabla">
+
+        <table>
+            <thead>
+                <tr>
+                <th scope="col">Nombre</th>
+                <th scope="col">Apellido</th>
+                <th scope="col">DNI</th>
+                <th scope="col">Cargo</th>
+                </tr>
+            </thead>  
+
+
+    <hr> </hr>
+            <tbody>
+
+                {%for Colaborador in colaboradores  %}
+                <tr>
+                <th scope="row">{{ Colaborador.nombre }}</th>
+                <td>{{ Colaborador.apellido }}</td>
+                <td>{{ Colaborador.dni }}</td>
+                <td>{{ Colaborador.cargo }}</td>
+                {% endfor %} 
+
+            </tbody>
+        </table>          
+    </div>
+</center> 
+
+{% endblock %}

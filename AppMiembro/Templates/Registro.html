@@ -1,0 +1,28 @@
+
+{% extends "Esqueleto.html" %}
+
+{% load static %}
+
+{% block titulo %}
+<h1 class="mb-5"> Seccion de Registro </h1>
+{% endblock %}
+
+{% block contenido_que_cambia %}
+<center><h1> ¡ CREA TU USUARIO ACA! </h1> </center>   
+<p></p> 
+<form action="{% url 'register' %}" method="POST">{% csrf_token %}
+    <center> 
+        <table>
+            
+            {{form.as_table}}
+            
+        </table>
+
+        <p></p>
+        <input type="submit" value="REGISTRAR">
+    </center> 
+</form>
+
+
+
+{% endblock %}

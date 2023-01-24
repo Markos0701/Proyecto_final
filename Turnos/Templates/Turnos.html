@@ -1,0 +1,31 @@
+
+{% extends "Esqueleto_t.html" %}
+
+{% load static %}
+
+{% block titulo %}
+<h1 class="mb-5">Aguenda tu Turno </h1>
+{% endblock %}
+
+{% block contenido_que_cambia %}
+<center> 
+    <h1> Agenda tu Turno  </h1>    
+    <h1 class="mb-5">{{mensaje}}</h1>
+ 
+    <form action="{% url 'Agenda_turnos' %}" method="POST">{% csrf_token %}
+        
+        <table>
+
+            {{form_turnos.as_table}}
+
+        </table>
+        
+        <input type="submit" value="Reservar turno">
+
+    </form>
+
+
+</center>
+
+{% endblock %}
+

@@ -1,0 +1,26 @@
+
+{% extends "Esqueleto.html" %}
+
+{% load static %}
+
+{% block titulo %}
+<h1 class="mb-5">BIENVENIDOS A LA SECCION PRODUCTOS </h1>
+{% endblock %}
+
+{% block contenido_que_cambia %}
+
+<center>
+    <h1> LISTA DE PRODUCTOS  </h1>
+</center>
+
+
+{% for productos in productos %}
+<center>
+<h3>{{productos.nombre}} - {{productos.marca}} - {{productos.cantidad}} </h3>
+</center>
+{% endfor %}
+
+
+
+
+{% endblock %}

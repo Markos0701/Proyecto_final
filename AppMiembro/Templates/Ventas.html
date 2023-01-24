@@ -1,0 +1,61 @@
+
+{% extends "Esqueleto.html" %}
+
+{% load static %}
+
+{% block titulo %}
+<h1 class="mb-5">SECCIÓN PARA REGISTRO DE VENTAS </h1>
+{% endblock %}
+
+{% block contenido_que_cambia %}
+<center> 
+    <h1> Ingrese los datos de la venta  </h1>    
+    <h1 class="mb-5">{{mensaje}}</h1>
+ 
+    <form action="{% url 'Ventas_Site' %}" method="POST">{% csrf_token %}
+        
+        <table>
+
+            {{form_ventas.as_table}}
+
+        </table>
+        
+        <input type="submit" value="Ingresar Venta">
+
+    </form>
+
+    <div id="main-container-tabla">
+
+        <table>
+            <thead>
+                <tr>
+                <th scope="col">Barbero</th>
+                <th scope="col"> Servicio </th>
+                <th scope="col"> Cant_S </th>
+                <th scope="col"> Producto </th>
+                <th scope="col"> Cant_P </th>
+                </tr>
+            </thead>  
+</center>
+    <hr> </hr>
+    <h3> Ventas Generales listado  </h3> 
+<center>   
+            <tbody>
+
+                {%for Ventas in ventas  %}
+                <tr>
+                <th scope="row">{{ Ventas.barbero}}</th>
+                <td>{{ Ventas.servicio}}</td>
+                <td>{{ Ventas.servicio_cant }}</td>
+                <td>{{ Ventas.producto }}</td>
+                <td>{{ Ventas.producto_cant }}</td>
+                <td>{{ Ventas.fecha_registro }}</td>
+                </tr>
+                {% endfor %} 
+
+            </tbody>
+        </table>          
+    </div>
+</center> 
+
+{% endblock %}

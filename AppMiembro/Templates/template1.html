@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poyecto Markos</title>
+</head>
+<body>
+
+    <h1>PROYECTO FINAL MARKOS</h1>
+    <h3>test del proyecto a entregar</h3>
+
+        <div>
+            <p>Nombre= {{nombre}}</p>
+            <p>Apellido= {{apellido}}</p>
+            <p>Edad= {{edad}}</p>
+
+            <div>
+                <h4>Lista de Nota= {{lista_de_notas}}</h4>   
+
+                <ol>
+                    {% for nota in lista_de_notas %}
+
+                        {% if nota > 5 %}
+                        <li style="color:green ;"> NOTA APROBADA: {{ nota }}</li>
+                        {% else %}
+                        <li style="color:red ;"> NOTA APROBADA: {{ nota }}</li>
+                        {% endif %}
+                    {% endfor %}
+
+                </ol>
+            
+            </div>
+
+        </div>
+    
+</body>
+</html>

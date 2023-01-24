@@ -1,0 +1,49 @@
+
+{% extends "Esqueleto_t.html" %}
+
+{% load static %}
+
+{% block titulo %}
+<h1 class="mb-5">BIENVENIDOS A LA SECCION  DE TURNOS </h1>
+{% endblock %}
+
+{% block contenido_que_cambia %}
+
+<center>  
+    <h1> </h1>
+    <h1 class="mb-5"> {{mensaje}} </h1>
+
+    <div id="main-container-tabla">
+
+        <table>
+            <thead>
+                <tr>
+                <th scope="col">hora_Turno</th>
+                <th scope="col">Barbero </th>
+                <th scope="col">Cliente </th>
+                <th scope="col">fecha_turno </th>
+                <th scope="col">fecha_registro </th>
+                </tr>
+            </thead>  
+</center>
+
+    <h3> Trunos Agendados </h3>
+<center>  
+            <tbody>
+                {%for Trunos in turnos  %}
+                <tr>
+                <th scope="row">{{ Turnos.hora_Turno}}</th>
+                <td>{{ Trunos.Barbero }}</td>
+                <td>{{ Trunos.Cliente }}</td>
+                <td>{{ Trunos.fecha_turno }}</td>
+                <td>{{ Trunos.fecha_registro }}</td>
+                </tr>
+                {% endfor %} 
+
+            </tbody>
+        </table>          
+    </div>
+</center> 
+    
+{% endblock %}
+
