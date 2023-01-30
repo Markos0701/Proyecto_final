@@ -1,8 +1,17 @@
-from django.urls import path , include
+from django.urls import path , include ,re_path
 from .views import *
 from django.contrib.auth.views import LogoutView
 
-from Turnos.views import *
+from APPTurnos.views import *
+from AppChat.views import *
+
+from django.contrib import admin
+from django.conf.urls import include
+from django.conf import settings
+from django.conf.urls.static import static
+
+
+
 
 urlpatterns=[
     
@@ -11,8 +20,11 @@ urlpatterns=[
 
     # ==== > URL pirncipales
 
-    path("",Principal,name="Sitio_principal"),
+    path("",Home,name="Sitio_principal"),
+
     path("Sitio_principal/",Principal,name="Sitio_principal"),
+    path("Home/",Home,name="Home"),
+    
 
     # ==== > URL Colaboradores
     
@@ -52,11 +64,35 @@ urlpatterns=[
     path("Familiar_site/",Familiar_site,name="Familiar_site"),
     path("miembro/",familiar,name="familiar"),
 
+
+    #=== > APP Turnos
+
     path("Turnos/miembro/",Principal_turnos,name="Principal_turnos"),
-    
+    path("Agenda_turnos/",Agenda_turnos,name="Agenda_turnos"),
+
+    #==== > APP Chats
+
+
+    #path("Enviar_Mensaje/",Enviar_Mensaje,name="Enviar_Mensaje"),
+    #path("Leer_Mensajes/",Leer_Mensajes,name="Leer_Mensajes"),
 
     
 
+    path("Post_view/",Post_view,name="Post_view"),
+    path('VerPost/',VerPost,name="VerPost"),
+    path('eliminar_post/<id>',eliminar_post,name="eliminar_post"),
+    path('Editar_post/<id>',Editar_post,name="Editar_post"),
+    
+
+    path('ckeditor/', include('ckeditor_uploader.urls')),
+
+    path('admin/',admin.site.urls),
+    re_path(r'^ckeditor/', include('ckeditor_uploader.urls')),
+   
+
+    
 
 
 ]
+
+urlpatterns = urlpatterns + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

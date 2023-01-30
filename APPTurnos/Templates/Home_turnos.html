@@ -1,0 +1,62 @@
+
+{% extends "Esqueleto_t.html" %}
+
+{% load static %}
+
+
+    <!-- barra de accesos -->
+
+    {% block Nav_Editable %}
+
+    <a class="btn btn-primary" href="{% url 'Principal_turnos' %}">TURNOS</a>
+    <a class="btn btn-primary" href="{% url 'Agenda_turnos' %}">AGENDAR</a
+    
+    {% endblock %}
+    
+    <!-- Titulo-->
+
+
+{% block titulo %}
+<h1 class="mb-5">BIENVENIDOS A LA SECCION  DE TURNOS </h1>
+{% endblock %}
+
+{% block contenido_que_cambia %}
+
+<center>  
+    <h1> </h1>
+    <h1 class="mb-5"> {{mensaje}} </h1>
+
+    <div id="main-container-tabla">
+
+        <table class="table table-primary" style="color: rgb(9, 10, 10);">
+            <thead>
+                <tr>
+                <th scope="col" style="background-color: rgb(115, 115, 115); border-radius: 2px;">Hora</th>
+                <th scope="col" style="background-color: rgb(115, 115, 115); border-radius: 2px;">Barbero </th>
+                <th scope="col" style="background-color: rgb(115, 115, 115); border-radius: 2px;">Cliente </th>
+                <th scope="col" style="background-color: rgb(115, 115, 115); border-radius: 2px;">Fecha_turno </th>
+                <th scope="col" style="background-color: rgb(115, 115, 115); border-radius: 2px;">Fecha_registro </th>
+                </tr>
+            </thead>  
+                </center>
+
+                    <h3> Trunos Agendados </h3>
+                <center>  
+            <tbody>
+                {%for Trunos in turnos  %}
+                <tr>
+                <td>{{ Trunos.hora_Turno }}</td>
+                <td>{{ Trunos.Barbero }}</td>
+                <td>{{ Trunos.Cliente }}</td>
+                <td>{{ Trunos.fecha_turno }}</td>
+                <td>{{ Trunos.fecha_registro }}</td>
+                </tr>
+                {% endfor %} 
+
+            </tbody>
+        </table>          
+    </div>
+</center> 
+    
+{% endblock %}
+

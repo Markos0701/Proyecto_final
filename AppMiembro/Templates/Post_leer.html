@@ -1,0 +1,39 @@
+
+{% extends "Esqueleto.html" %}
+
+{% load static %}
+<script type="text/javascript" src="{% static 'ckeditor/ckeditor-init.js' %}"></script>
+<script type="text/javascript" src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
+
+<!-- barra de accesos -->
+
+{% block Nav_Editable %}
+<a class="btn btn-primary" href="{% url 'VerPost' %}">VER POSTS</a>
+<a class="btn btn-primary" href="{% url 'Post_view' %}">CREAR POST</a>
+
+{% endblock %}
+
+<!-- Titulo-->
+
+{% block titulo %}
+<h1 class="mb-5"> {{ mensaje }}</h1>
+{% endblock %}
+
+{% block contenido_que_cambia %}
+
+    <center> 
+        
+           
+            {%for Post in post  %}
+                <H3> {{ Post.titulo|safe}}</H3>- <p>{{ Post.id|safe}} -{{ Post.creador|safe}} - {{ Post.fecha_de_posteo|safe}} </p>
+                {{ Post.contenido|safe}} 
+                <a class="btn btn-danger" href="{% url 'eliminar_post' Post.id %}" style="width: 50px; font-size: 5px; margin-left: 1200px;" >DELETE</a>
+                <a class="btn btn-success" href="{% url 'Editar_post' Post.id %}" style="width: 50px; font-size: 5px;">Edit</a>
+                <hr></hr>                                            
+            {% endfor %}  
+
+       
+    </center> 
+
+
+{% endblock %}

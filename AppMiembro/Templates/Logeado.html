@@ -5,15 +5,19 @@
 
 {% block titulo %}
 <h1 class="mb-5"> Sección de Autrenticación de Usuario</h1>
+<h3 class="mb-5">{{mensaje}}</h3>
 {% endblock %}
 
 {% block contenido_que_cambia %}
-<center><h1> ¡ Ingresa tus credenciales! </h1> </center>   
+<center>
+    <h1> ¡ Ingresa tus credenciales! </h1>
+    
+</center>   
 <p></p> 
 <form action="{% url 'Logeando' %}" method="POST">{% csrf_token %}
     <center> 
-        <h1 class="mb-5">{{mensaje}}</h1>
-        <table>
+        
+        <table class="table table-primary" style="width: 30%;">
             
             {{form.as_table}}
             

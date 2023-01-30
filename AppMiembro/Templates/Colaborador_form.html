@@ -3,6 +3,17 @@
 
 {% load static %}
 
+<!-- barra de accesos -->
+
+{% block Nav_Editable %}
+<a class="btn btn-primary" href="{% url 'Ventas_Site' %}">VENTAS</a>
+<a class="btn btn-primary" href="{% url 'Colaborador_site' %}">PERSONAL</a>
+<a class="btn btn-primary" href="{% url 'Clientes_site' %}">CLIENTES</a>
+<a class="btn btn-primary" href="{% url 'Producto_site' %}">PRODUCTOS</a>
+{% endblock %}
+
+<!-- Titulo-->
+
 {% block titulo %}
 <h1 class="mb-5">BIENVENIDOS A LA SECCION COLABORADORES </h1>
 {% endblock %}
@@ -14,7 +25,7 @@
  
     <form action="{% url 'Colaborador_site' %}" method="POST">{% csrf_token %}
         
-        <table>
+        <table class="table table-primary" style="width: 50%;">
 
             {{form_colaborador.as_table}}
 
@@ -26,13 +37,13 @@
 
     <div id="main-container-tabla">
 
-        <table>
+        <table class="table teble-primary" style="width: 90%;">
             <thead>
                 <tr>
-                <th scope="col">Nombre</th>
-                <th scope="col">Apellido</th>
-                <th scope="col">DNI</th>
-                <th scope="col">Cargo</th>
+                    <th scope="col" style="background-color: rgb(115, 115, 115); border-radius: 2px;">Nombre </th>
+                    <th scope="col" style="background-color: rgb(115, 115, 115); border-radius: 2px;">Apellido</th>
+                    <th scope="col" style="background-color: rgb(115, 115, 115); border-radius: 2px;">DNI</th>
+                    <th scope="col" style="background-color: rgb(115, 115, 115); border-radius: 2px;">Cargo</th
                 </tr>
             </thead>  
 

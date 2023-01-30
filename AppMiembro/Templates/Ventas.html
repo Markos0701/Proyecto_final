@@ -3,9 +3,22 @@
 
 {% load static %}
 
+<!-- barra de accesos -->
+
+{% block Nav_Editable %}
+<a class="btn btn-primary" href="{% url 'Ventas_Site' %}">VENTAS</a>
+<a class="btn btn-primary" href="{% url 'Colaborador_site' %}">PERSONAL</a>
+<a class="btn btn-primary" href="{% url 'Clientes_site' %}">CLIENTES</a>
+<a class="btn btn-primary" href="{% url 'Producto_site' %}">PRODUCTOS</a>
+{% endblock %}
+
+<!-- Titulo-->
+
 {% block titulo %}
 <h1 class="mb-5">SECCIÓN PARA REGISTRO DE VENTAS </h1>
 {% endblock %}
+
+<!-- Contenido a Mostrar-->
 
 {% block contenido_que_cambia %}
 <center> 
@@ -13,43 +26,45 @@
     <h1 class="mb-5">{{mensaje}}</h1>
  
     <form action="{% url 'Ventas_Site' %}" method="POST">{% csrf_token %}
-        
-        <table>
+        <center>
+        <table class="table table-primary" style="width:50%; text-align: center; border-radius: 100px;">
 
             {{form_ventas.as_table}}
 
         </table>
-        
+        </center>
         <input type="submit" value="Ingresar Venta">
 
     </form>
 
     <div id="main-container-tabla">
 
-        <table>
+        <table class="table table-primary" style="width: 80%; ">
             <thead>
                 <tr>
-                <th scope="col">Barbero</th>
-                <th scope="col"> Servicio </th>
-                <th scope="col"> Cant_S </th>
-                <th scope="col"> Producto </th>
-                <th scope="col"> Cant_P </th>
+                
+                <th scope="col" style="background-color: rgb(115, 115, 115); border-radius: 2px;"> Barbero </th>
+                <th scope="col" style="background-color: rgb(115, 115, 115); border-radius: 2px;"> Servicio </th>
+                <th scope="col" style="background-color: rgb(115, 115, 115); border-radius: 2px;"> Cantidad </th>
+                <th scope="col" style="background-color: rgb(115, 115, 115); border-radius: 2px;"> Producto </th>
+                <th scope="col" style="background-color: rgb(115, 115, 115); border-radius: 2px;"> Cantidad  </th>
+                <th scope="col" style="background-color: rgb(115, 115, 115); border-radius: 2px;"> Fecha </th>
                 </tr>
-            </thead>  
-</center>
-    <hr> </hr>
-    <h3> Ventas Generales listado  </h3> 
-<center>   
-            <tbody>
+                </thead>  
+                        </center>
+                            <hr> </hr>
+                            <h3> REGISTRO DE VENTAS  </h3> 
+                        <center>   
+                <tbody>
 
                 {%for Ventas in ventas  %}
                 <tr>
                 <th scope="row">{{ Ventas.barbero}}</th>
-                <td>{{ Ventas.servicio}}</td>
-                <td>{{ Ventas.servicio_cant }}</td>
-                <td>{{ Ventas.producto }}</td>
-                <td>{{ Ventas.producto_cant }}</td>
-                <td>{{ Ventas.fecha_registro }}</td>
+                <td style="background-color: rgb(199, 197, 197);">{{ Ventas.servicio}}</td>
+                <td style="background-color: rgb(199, 197, 197);">{{ Ventas.servicio_cant }}</td>
+                <td style="background-color: rgb(199, 197, 197);">{{ Ventas.producto }}</td>
+                <td style="background-color: rgb(199, 197, 197);">{{ Ventas.producto_cant }}</td>
+                <td style="background-color: rgb(199, 197, 197);">{{ Ventas.fecha_registro }}</td>
                 </tr>
                 {% endfor %} 
 

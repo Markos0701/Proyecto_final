@@ -1,0 +1,40 @@
+
+{% extends "Esqueleto.html" %}
+
+{% load static %}
+<script type="text/javascript" src="{% static 'ckeditor/ckeditor-init.js' %}"></script>
+<script type="text/javascript" src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
+
+<!-- barra de accesos -->
+
+{% block Nav_Editable %}
+<a class="btn btn-primary" href="{% url 'VerPost' %}">VER POSTS</a>
+<a class="btn btn-primary" href="{% url 'Post_view' %}">CREAR POST</a>
+
+{% endblock %}
+
+{% block titulo %}
+<h1 class="mb-5"> Bienvenido a la Seccion de Posteo </h1>
+{% endblock %}
+
+{% block contenido_que_cambia %}
+
+<center><h1> <h3>{{ mensaje }}</h3> </center>   
+<p></p> 
+<form method="POST" enctype="multipart/form-data" > {% csrf_token %}
+    <center> 
+        <table>
+            
+            {{form.media|safe}}
+            {{form.as_p|safe}}
+           
+        </table>
+
+        <p></p>
+        <input type="submit" value="POSTEAR">
+    </center> 
+</form>
+
+
+
+{% endblock %}

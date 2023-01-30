@@ -1,6 +1,10 @@
 from django.db import models
 from datetime import*
 from django.contrib.auth.models import User
+from ckeditor.widgets import CKEditorWidget
+from ckeditor.fields import RichTextField
+from ckeditor_uploader.fields import RichTextUploadingField
+from django.utils.text import slugify
 
 # Create your models here.
 
@@ -60,4 +64,25 @@ class Ventas(models.Model):
 class Avatar(models.Model):
     imagen= models.ImageField(upload_to="avatars")
     user= models.ForeignKey(User, on_delete=models.CASCADE)
+
+
+class Post(models.Model):
+    creador= models.CharField(('titulo'),max_length=100)
+    titulo= models.CharField(('titulo'),max_length=100)
+    contenido=RichTextUploadingField(blank=True,null=False)
+    fecha_de_posteo= models.DateTimeField('fecha_de_posteo')
+
+
+class Posteo(models.Model):
+ 
+    titulo= models.CharField(('titulo'),max_length=100)
+    contenido=RichTextUploadingField(blank=True,null=False)
+    fecha_de_posteo= models.DateTimeField('fecha_de_posteo')
+    slug = models.SlugField(default='',blank=True)
+
+    def save(self):
+        self.slug= slugify(self.titulo)
+
+    def __str__(self) -> str:
+        return '%s' % self.titulo
   

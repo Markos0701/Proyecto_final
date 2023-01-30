@@ -1,0 +1,41 @@
+
+{% extends "Esqueleto_t.html" %}
+
+{% load static %}
+
+
+    <!-- barra de accesos -->
+
+    {% block Nav_Editable %}
+
+    <a class="btn btn-primary" href="{% url 'Principal_turnos' %}">TURNOS</a>
+    <a class="btn btn-primary" href="{% url 'Agenda_turnos' %}">AGENDAR</a
+    
+    {% endblock %}
+
+{% block titulo %}
+<h1 class="mb-5">BIENVENIDOS A LA SECCION  DE TURNOS</h1>
+{% endblock %}
+
+{% block contenido_que_cambia %}
+<center> 
+    <h1> Agenda tu Turno  </h1>    
+    <h1 class="mb-5">{{mensaje}}</h1>
+ 
+    <form action="{% url 'Agenda_turnos' %}" method="POST">{% csrf_token %}
+        
+        <table class="table table-primary" style="width: 50%;">
+
+            {{form_turnos.as_table}}
+
+        </table>
+        
+        <input type="submit" value="Reservar turno">
+
+    </form>
+
+
+</center>
+
+{% endblock %}
+

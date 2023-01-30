@@ -41,8 +41,14 @@ def Principal(request):
     teste={"Hola":"Markos"}
     template2= loader.get_template("principal.html")
     documento2= template2.render(teste)
-    return render(request,"Principal.html",{"mensaje":"Contenido"})
+    return render(request,"Principal.html",{"mensaje":""})
 
+@login_required
+def Home(request):
+    teste={"Hola":"Markos"}
+    template2= loader.get_template("principal.html")
+    documento2= template2.render(teste)
+    return render(request,"Home.html",{"mensaje":"","avatar": obtenerAvatar(request)})
     
 # FUNCIONES DE BASE DE DATOS
 
@@ -79,9 +85,9 @@ def Colaborador_site(request):
             fecha_ingreso=info["fecha_ingreso"]
             colaborador= Colaborador(nombre= nombre, apellido= apellido,dni=dni,cargo= cargo,fecha_ingreso= fecha_ingreso)
             colaborador.save()
-            return render(request,"Principal.html" ,{"mensaje":"colaborador editado correctamente","colaboradores": colaborador,"avatar": obtenerAvatar(request)})
+            return render(request,"Home.html" ,{"mensaje":"colaborador editado correctamente","colaboradores": colaborador,"avatar": obtenerAvatar(request)})
         else:
-            return render(request,"principal.html" ,{"mensaje":"La informacion del colaborador ingresada no es valida","colaboradores": colaborador,"avatar": obtenerAvatar(request)})
+            return render(request,"Home.html" ,{"mensaje":"La informacion del colaborador ingresada no es valida","colaboradores": colaborador,"avatar": obtenerAvatar(request)})
 
     else:
         formulario= ColaboradorForm()
@@ -185,9 +191,9 @@ def Producto_site(request):
             cantidad=info["cantidad"]
             producto= Producto(nombre= nombre, marca= marca,codigo=codigo ,cantidad= cantidad)
             producto.save()
-            return render(request,"Principal.html" ,{"mensaje":"Producto ingresado correctamente","avatar": obtenerAvatar(request)})
+            return render(request,"Home.html" ,{"mensaje":"Producto ingresado correctamente","avatar": obtenerAvatar(request)})
         else:
-            return render(request,"principal.html" ,{"mensaje":"La informacion del Producto ingresada no es valida","avatar": obtenerAvatar(request)})
+            return render(request,"Home.html" ,{"mensaje":"La informacion del Producto ingresada no es valida","avatar": obtenerAvatar(request)})
 
     else:
         formulario= ProductoForm()
@@ -296,6 +302,7 @@ def register(request):
         form= RegistroUsuarioForm()
         return render(request, "Registro.html", {"form": form})
 
+
 def Logeando(request):
     if request.method=="POST":
         form=AuthenticationForm(request, data=request.POST)
@@ -307,11 +314,12 @@ def Logeando(request):
             usuario=authenticate(username=usu, password=clave)#verifica si el usuario existe
             if usuario is not None:
                 login(request, usuario)
-                return render(request,"Principal.html",{"mensaje":f"Usuario {usu} logueado corectamente"})
+                return render(request,"Home.html",{"mensaje":f"Usuario {usu} logueado corectamente","avatar": obtenerAvatar(request)})
             else:
                 return render(request,"Principal.html",{"mensaje":"usuario y contraseña incorrectos"})
         else:
-            return render(request,"Logeado.html",{"form":form})
+            form=AuthenticationForm()
+        return render(request, "Logeado.html",{"form":form,"mensaje":"usuario y contraseña incorrectos"})
     else:
         form=AuthenticationForm()
         return render(request, "Logeado.html",{"form":form})
@@ -362,5 +370,63 @@ def agregarAvatar(request):
         form= AvatarForm()
         return render(request, "agregarAvatar.html",{"form": form,"usuario":request.user,"mensaje":"Agrega la imagen de tu Avatar","avatar": obtenerAvatar(request)})
 
+@login_required
 def About(request):
     return render(request, "About.html",{"mensaje":"Sección de Desarrolladores","avatar": obtenerAvatar(request)})
+
+
+def Post_view(request):
+    usuario = request.user
+    if request.method=="POST":
+        form=PostForm(request.POST)
+        if form.is_valid():
+           info= form.cleaned_data
+           creador=usuario.username
+           titulo=info["titulo"]
+           contenido=info["contenido"]
+           fecha_de_posteo=datetime.today()
+           post=Post(creador= creador,titulo=titulo, contenido=contenido, fecha_de_posteo=fecha_de_posteo)
+           post.save()
+           return render(request, "Post_site.html",{"form": form,"usuario":request.user,"mensaje":"Se a subido el post de forma correcta","avatar": obtenerAvatar(request)})
+    else:
+        form= PostForm()
+        return render(request, "Post_site.html",{"form": form,"usuario":request.user,"mensaje":"Carga tu Post","avatar": obtenerAvatar(request)})
+
+
+
+@login_required
+def VerPost(request):
+    posts=Post.objects.all().order_by('-fecha_de_posteo')
+    form= PostForm(request.POST)
+
+    return render(request, "Post_leer.html", {"mensaje":"ULTIMOS POST PUBLICADOS","post":posts,"avatar": obtenerAvatar(request)})
+
+@login_required
+def eliminar_post(request,id):
+
+    posts=Post.objects.get(id=id)
+    posts.delete()
+    posts=Post.objects.all().order_by('-fecha_de_posteo')
+    return render (request, "Post_leer.html", {"mensaje":"ULTIMOS POST PUBLICADOS","post":posts,"avatar": obtenerAvatar(request)})     
+    
+@login_required
+def Editar_post(request,id):
+    posts=Post.objects.get(id=id)
+    if request.method=="POST":
+        form= PostForm(request.POST)
+        if form.is_valid():
+            info=form.cleaned_data
+            posts.titulo=info["titulo"]
+            posts.contenido=info["contenido"]
+            posts.fecha_de_posteo=datetime.today()
+            posts.save()
+            #Ver clientes
+            formulario= PostForm()
+            posts=Post.objects.all().order_by('-fecha_de_posteo')
+            return render(request, "Post_leer.html", {"mensaje":"ULTIMOS POST PUBLICADOS","post":posts})     
+
+    else:
+        formulario= PostForm(initial={"titulo":posts.titulo,"Contenido":posts.contenido})
+        return render (request, "Post_site.html", {"form":formulario ,"usuario":request.user,"mensaje":"Editando Post","avatar": obtenerAvatar(request)})
+
+

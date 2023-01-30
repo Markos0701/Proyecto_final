@@ -22,23 +22,24 @@
             <div class="container">
 
                 {% if user.is_authenticated %}
-                <a class="navbar-brand" href="{% url 'Sitio_principal' %}">INICIO</a>
-                <a class="btn btn-primary" href="{% url 'Ventas_Site' %}">VENTAS</a>
-                <a class="btn btn-primary" href="{% url 'Colaborador_site' %}">PERSONAL</a>
-                <a class="btn btn-primary" href="{% url 'Clientes_site' %}">CLIENTES</a>
-                <a class="btn btn-primary" href="{% url 'Producto_site' %}">PRODUCTOS</a>
-                <a class="btn btn-primary" href="{% url 'Principal_turnos' %}">TURNOS</a>
-                <p>Bienvenido: {{user.username}}</p>
-                <img src="{{ avatar }}" alt="" width="100" height="100">
-                <a class="btn btn-danger" href="{% url 'logout' %}">CERRAR SESION</a>
-                <a class="btn btn-success" href="{% url 'editarperfil' %}">EDITAR USUARIO</a>
-                <!-- Opcional de cambiar avatar solo en la principal-->
-                {% block Boton_Avatar %}
 
-                {% endblock %}
+                    <a class="navbar-brand" href="{% url 'Home' %}">INICIO</a>
+                    <a class="btn btn-primary" href="{% url 'Ventas_Site' %}">GESTION</a>
+                    <a class="btn btn-primary" href="{% url 'Principal_turnos' %}">TURNOS</a>
+                    <a class="btn btn-primary" href="{% url 'Enviar_Mensaje' %}">MENSAJERIA</a>
+                    <a class="btn btn-primary" href="{% url 'VerPost' %}">BLOGS</a>
+                
+                    <p>Bienvenido: {{user.username}}</p>
+                    <img src="{{ avatar }}" alt="" width="100" height="100">
+                    <a class="btn btn-danger" href="{% url 'logout' %}">CERRAR SESION</a>
+                    <a class="btn btn-success" href="{% url 'editarperfil' %}">EDITAR USUARIO</a>
+                    <!-- Opcional de cambiar avatar solo en la principal-->
+                    {% block Boton_Avatar %}
+
+                    {% endblock %}
                 {% else %}
-                <a class="btn btn-primary" href="{% url 'register' %}">REGISTRATE</a>
-                <a class="btn btn-success" href="{% url 'Logeando' %}">INGRESA</a>
+                    <a class="btn btn-primary" href="{% url 'register' %}">REGISTRATE</a>
+                    <a class="btn btn-success" href="{% url 'Logeando' %}">INGRESA</a>
                 {% endif %}
 
             </div>
@@ -85,35 +86,21 @@
                     </div>
                 </div>
             </div>
+    <div style="align-items: flex-end;">
+        <center>
+
+            {% block Nav_Editable %}
+            {% endblock %} 
+    </div>   
+        </center>
+          
         </header>
         <!-- Icons Grid-->
+         <!-- Opciones para navegar por APP -->
         {% block contenido_que_cambia %}
         
         {% endblock %}
-        <center>
-        <section class="features-icons bg-light text-center">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-4">
-                        <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
-                            <div class="features-icons-icon d-flex"><i class="bi-window m-auto text-primary"></i></div>
-                            <h3>Gestion Financiera</h3>
-                            <a class="list-inline-item"  href="{% url 'Ventas_Site' %}" > Registrar Venta</a>
-                            <p class="lead mb-0">Resgistrador de Ventas Diarias!</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
-                            <div class="features-icons-icon d-flex"><i class="bi-layers m-auto text-primary"></i></div>
-                            <h3>Bootstrap 5 Ready</h3>
-                            <p class="lead mb-0">Featuring the latest build of the new Bootstrap 5 framework!</p>
-                        </div>
-                    </div>
-                    
-                </div>
-            </div>
-        </section>
-        </center>
+
         <!-- Footer-->
         <footer class="footer bg-light">
             <div class="container">

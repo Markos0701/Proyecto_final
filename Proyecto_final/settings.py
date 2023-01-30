@@ -14,6 +14,7 @@ from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+import os
 
 
 # Quick-start development settings - unsuitable for production
@@ -39,8 +40,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'AppMiembro',
     'schedule',
-    'Turnos',
-    'chat',
+    'APPTurnos',
+    'AppChat',
+    'ckeditor',
+    'ckeditor_uploader',
+
     
 ]
 
@@ -52,6 +56,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    
 ]
 
 ROOT_URLCONF = 'Proyecto_final.urls'
@@ -59,9 +64,9 @@ ROOT_URLCONF = 'Proyecto_final.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ["C:/Users/PC_ITF-QUILMES/Downloads/Curso_Python/git_repos/Proyecto_final/AppMiembro/Templates",
-                "C:/Users/PC_ITF-QUILMES/Downloads/Curso_Python/git_repos/Proyecto_final/Turnos/Templates",
-                "C:/Users/PC_ITF-QUILMES/Downloads/Curso_Python/git_repos/Proyecto_final/chat/Templates"
+        'DIRS': ["C:/Users/PC_ITF-QUILMES/Downloads/Curso_Python/Proyecto_final/APPTurnos/Templates",
+                "C:/Users/PC_ITF-QUILMES/Downloads/Curso_Python/Proyecto_final/APPTurnos/Templates",
+                "C:/Users/PC_ITF-QUILMES/Downloads/Curso_Python/Proyecto_final/AppChat/Templates",
                 ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -123,8 +128,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = '/AppMiembro/static/'
-STATIC_URL = '/turnos/static/'
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
@@ -132,7 +136,76 @@ STATIC_URL = '/turnos/static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGOUT_REDIRECT_URL='/AppMiembro/'
-LOGIN_URL='/AppMiembro/Logeando/'
+LOGIN_URL='/AppMiembro/Sitio_principal/'
+
+STATIC_URL = '/AppMiembro/static/'
+#STATIC_URL = '/APPTurnos/static/'
+STATIC_ROOT = '/AppMiembro/static/'
+
 
 MEDIA_URL='/media/'
-MEDIA_ROOT=  BASE_DIR/ 'media'
+MEDIA_ROOT= os.path.join(BASE_DIR, 'media')
+CKEDITOR_UPLOAD_PATH = "/uploads/"
+
+CKEDITOR_CONFIGS = {
+    'default': {
+     
+        'toolbar_Custom': [
+            {'name': 'document', 'items': ['Source', '-', 'Save', 'NewPage', 'Preview', 'Print', '-', 'Templates']},
+            {'name': 'clipboard', 'items': ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo']},
+            {'name': 'editing', 'items': ['Find', 'Replace', '-', 'SelectAll']},
+            {'name': 'forms',
+             'items': ['Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton',
+                       'HiddenField']},
+            '/',
+            {'name': 'basicstyles',
+             'items': ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat']},
+            {'name': 'paragraph',
+             'items': ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv', '-',
+                       'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl',
+                       'Language']},
+            {'name': 'links', 'items': ['Link', 'Unlink', 'Anchor']},
+            {'name': 'insert',
+             'items': ['Image', 'Youtube','Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe']},
+            '/',
+            {'name': 'styles', 'items': ['Styles', 'Format', 'Font', 'FontSize']},
+            {'name': 'colors', 'items': ['TextColor', 'BGColor']},
+            {'name': 'tools', 'items': ['Maximize', 'ShowBlocks']},
+            {'name': 'about', 'items': ['CodeSnippet']},
+            {'name': 'about', 'items': ['About']},
+            '/',  # put this to force next toolbar on new line
+            {'name': 'yourcustomtools', 'items': [
+                # put the name of your editor.ui.addButton here
+                'Preview',
+                'Maximize',
+
+            ]},
+        ],
+        'toolbar': 'Custom',  # put selected toolbar config here
+        'toolbarGroups': [{ 'name': 'document', 'groups': [ 'mode', 'document', 'doctools' ] }],
+        'height': 400,
+        # 'width': '100%',
+        'filebrowserWindowHeight': 725,
+        'filebrowserWindowWidth': 940,
+        'toolbarCanCollapse': True,
+        'mathJaxLib': '//cdn.mathjax.org/mathjax/2.2-latest/MathJax.js?config=TeX-AMS_HTML',
+        'tabSpaces': 4,
+        'extraPlugins': ','.join([
+            'uploadimage', # the upload image feature
+            # your extra plugins here
+            'div',
+            'autolink',
+            'autoembed',
+            'embedsemantic',
+            'autogrow',
+            'devtools',
+            'widget',
+            'lineutils',
+            'clipboard',
+            'dialog',
+            'dialogui',
+            'elementspath',
+            'codesnippet',
+        ]),
+    }
+}

@@ -1,0 +1,32 @@
+{% extends "Esqueleto_Chat.html" %}
+
+{% load static %}
+
+<!-- barra de accesos -->
+
+{% block Nav_Editable %}
+<a class="btn btn-primary" href="{% url 'Enviar_Mensaje' %}">ENVIAR MENSAJE</a>
+<a class="btn btn-primary" href="{% url 'Leer_Mensajes' %}">MIS MENSAJES !</a>
+
+{% endblock %}
+
+{% block titulo %}
+<h1 class="mb-5">BIENVENIDOS A LA SECCION CHAT </h1>
+{% endblock %}
+
+{% block contenido_que_cambia %}
+<center> 
+    <h1 class="mb-5">Bandeja de Entrada: {{Usuario}}</h1>   
+    <h1 class="mb-5">{{mensaje}}</h1>
+ 
+    </table>
+    <hr></hr>
+    {% for mensajes in mensajes %}
+        <h3>{{mensajes.fecha_de_envio}} - {{mensajes.emisor}}  </h3>
+        <p>
+        {{mensajes.cuerpo}}
+        </p>
+        <hr></hr>  
+    {% endfor %}
+</center> 
+{% endblock %}

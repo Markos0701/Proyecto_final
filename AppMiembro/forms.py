@@ -1,6 +1,13 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.forms import User
+from ckeditor.fields import RichTextField
+from ckeditor_uploader.fields import RichTextUploadingField
+
+from django.forms import ModelForm
+from .models import Post
+
+from ckeditor.widgets import CKEditorWidget
 
 #====================  FORMS DEL PROGRAMA ====================================
 
@@ -86,3 +93,16 @@ class UserEditForm(UserCreationForm):
 class AvatarForm(forms.Form):
     imagen=forms.ImageField(label="Imagen")
 
+# ===formulario Posteo.
+
+class PostForm(ModelForm):
+    class Meta:
+        model= Post
+        fields = ['titulo','contenido']
+   
+    #titulo=forms.CharField(label="Titulo",max_length=100)
+    #Contenido=forms.CharField(CKEditorWidget())
+    #fecha_de_posteo= forms.DateTimeField()
+    
+    
+    #,max_length=1000

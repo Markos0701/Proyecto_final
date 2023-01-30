@@ -1,0 +1,23 @@
+
+{% extends "Esqueleto.html" %}
+
+{% load static %}
+
+{% block Boton_Avatar %}
+&nbsp
+
+<a class="list-inline-item"  href="{% url 'agregarAvatar' %}" >Cambiar Avatar</a>
+
+{% endblock %}
+
+
+{% block titulo %}
+<h1 class="mb-5">SISTEMA DE GESTION</h1>
+<h3 class="mb-5">PROYECTO FINAL</h3>
+<h3 class="mb-5">{{mensaje}}</h3>
+{% endblock %}
+
+{% block contenido_que_cambia %}
+
+{% endblock %}
+
